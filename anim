@@ -16,7 +16,8 @@ function setUp () {
   echo -e "\e[${animY};1H\c"
 
   # save position
-  echo -e '\e[s\c'
+  tput sc
+  rc="$(tput rc)"
 
   # pick rendering position (just on the screen)
   animW=$(tput cols)
@@ -81,7 +82,7 @@ function truncateBuffers () {
 }
 
 function printToScreen () {
-  echo -e '\e[u\c'
+  echo -e "${rc}\c"
   for i in ${!scr[*]}; do
     if [ $animX -gt 0 ]; then
       echo -e "\e[${animX}C\c"
