@@ -19,4 +19,4 @@ The `muybridge*` sample animations are based on work by the Victorian photograph
 He famously proved that a horse's hooves all leave the ground at once while galloping.
 He took many sequences of shots of people and animals moving, and althought they are separate still photos, they work like the frames of a moving image.
 
-The other samplez are hand crafted ASCII art animation.
+The other samples are hand crafted ASCII art animation.
