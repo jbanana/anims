@@ -1,0 +1,126 @@
+# This should be sourced by another bash script
+
+function setUp () {
+  # enable alternative screen buffer
+  tput smcup
+
+  # prevent line wrap
+  tput rmam
+
+  # hide cursor
+  echo -e '\e[?25l\c'
+
+  # position cursor
+  animH=$(tput lines)
+  animY=$(( animH / 4 ))
+  echo -e "\e[${animY};1H\c"
+
+  # save position
+  echo -e '\e[s\c'
+
+  # pick rendering position (just on the screen)
+  animW=$(tput cols)
+  let animX="${animW} - 2"
+
+  # create buffers
+  buf=()
+  scr=()
+}
+
+function preAnim () {
+  :
+}
+
+function preFrame () {
+  :
+}
+
+function postFrame () {
+  :
+}
+
+function tearDown () {
+  # cursor back on
+  echo -e '\e[?25h\c'
+
+  # restore line wrap
+  tput smam
+
+  # disable alternative screen buffer
+  tput rmcup
+}
+trap tearDown EXIT
+
+function truncateBuffers () {
+  scr=()
+  for i in ${!buf[*]}; do
+    scr[i]="${buf[i]}"
+    if test ${animX} -le 0; then
+      ansi=""
+      stripped=0
+      until test ${stripped} -eq ${animX}; do
+        if [[ "${scr[i]}" =~ ^(\\e\[[0-9;]*[a-zA-Z])(.*) ]]; then
+          ansi="${ansi}${BASH_REMATCH[1]}"
+          scr[i]="${BASH_REMATCH[2]}"
+        else
+          if [[ "${scr[i]}" =~ ^\\\\(.*) ]]; then
+            scr[i]="${BASH_REMATCH[1]}"
+          else
+            scr[i]="${scr[i]:1}"
+          fi
+          stripped=$(( stripped - 1 ))
+        fi
+      done
+      if test -z "${scr[i]}"; then
+        scr[i]=""
+      else
+        scr[i]="${ansi}${scr[i]}"
+      fi
+    fi
+  done
+}
+
+function printToScreen () {
+  echo -e '\e[u\c'
+  for i in ${!scr[*]}; do
+    if [ $animX -gt 0 ]; then
+      echo -e "\e[${animX}C\c"
+    fi
+    echo -e "${scr[i]}\e[K\e[m"
+  done
+}
+
+function buffersOffScreen () {
+  for i in ${!scr[*]}; do
+    #echo -e "\e[${i};20H${i} ${#scr[i]} \c"
+    if test ${#scr[i]} -gt 0; then
+      false
+      return
+    fi
+  done
+  true
+}
+
+function advanceRenderingPosition () {
+  let animX="${animX} - 1"
+}
+
+function waitBetweenFrames () {
+  sleep 0.075
+}
+
+function animate () {
+  setUp
+  preAnim
+
+  while true; do
+    preFrame "${animX}"
+    printToBuffers "${animX}"
+    truncateBuffers
+    printToScreen
+    postFrame "${animX}"
+    if buffersOffScreen; then break; fi
+    waitBetweenFrames
+    advanceRenderingPosition
+  done
+}

@@ -1,0 +1,63 @@
+#!/bin/bash
+function tbody {
+  buf[2]='    \e[4m__\e[m'
+  buf[3]='    ││         _____'
+  buf[4]='  \e[4m  ││  \e[m   _   │() C'
+  buf[5]='  │    │\e[4m  / \\  \e[m│   │  _'
+  buf[6]='  │    │  _____│   │ │ │    ___________    ___________'
+  buf[7]='  │    │ │     │   │ │ │    |\\  /_\\  /|    |\\  /_\\  /|'
+  buf[8]='|=\e[4m│ || | |     |   |\e[m=\e[4m| |\e[m=||=\e[4m| \\/   \\/ |\e[m=||=\e[4m| \\/   \\/ |\e[m=|'
+}
+function s3 {
+  buf[0]='         #@#  (#)  @  ..'
+  buf[1]='     @@'
+}
+function s1 {
+  buf[0]='           @#@  (@)  #  ..'
+  buf[1]='     @@@'
+}
+function s2 {
+  buf[0]='       @@@   @#@  (@)  #  .'
+  buf[1]=''
+}
+function w1 {
+  buf[9]="      \\\\\e[4m  \e[m/  \\\\\e[4m\` \e[m/   |=|       \\\\\e[4m'\e[m/   \\\\\e[4m \e[m/      \\\\\e[4m \e[m/   \\\\\e[4m\`\e[m/"
+}
+function w2 {
+  buf[9]="      \\\\\e[4m\` \e[m/  \\\\\e[4m '\e[m/   |=|       \\\\\e[4m\`\e[m/   \\\\\e[4m'\e[m/      \\\\\e[4m'\e[m/   \\\\\e[4m \e[m/"
+}
+function w3 {
+  buf[9]="      \\\\\e[4m '\e[m/  \\\\\e[4m  \e[m/   |=|       \\\\\e[4m \e[m/   \\\\\e[4m\`\e[m/      \\\\\e[4m\`\e[m/   \\\\\e[4m'\e[m/"
+}
+function t1 {
+  s1
+  tbody
+  w1
+}
+function t2 {
+  s2
+  tbody
+  w2
+}
+function t3 {
+  s3
+  tbody
+  w3
+}
+function printToBuffers {
+  case $(( ( $1 + animW ) % 3 )) in
+    0)
+      t1
+      ;;
+    1)
+      t2
+      ;;
+    *)
+      t3
+      ;;
+  esac
+}
+
+. anim
+
+animate

@@ -1,0 +1,224 @@
+#!/bin/bash
+function printToBuffers {
+  # (adjusted pos) % (number of frames * x change) / x change
+  case $(( ( $1 + 30 ) % 50 / 5 )) in
+    9)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]='       _'
+      buf[ 4]='      \e[4m| |\e[m'
+      buf[ 5]='      (_)'
+      buf[ 6]='      /  \\'
+      buf[ 7]='      |  |\\'
+      buf[ 8]='      |  |/'
+      buf[ 9]='      | o/\\'
+      buf[10]='      |    \\'
+      buf[11]='     /      |'
+      buf[12]='    /_______|'
+      buf[13]='     \e[95m/      \e[92m\\\e[m'
+      buf[14]='   \e[95m_/       \e[92m/\e[m'
+      ;;
+    8)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]='       _'
+      buf[ 4]='      \e[4m| |\e[m'
+      buf[ 5]='      (_)'
+      buf[ 6]='      /  \\'
+      buf[ 7]='      |  |'
+      buf[ 8]='      |  |'
+      buf[ 9]='      |o  \\'
+      buf[10]='     /     |'
+      buf[11]='    /      \\__'
+      buf[12]='== /__________|'
+      buf[13]='_|     \e[95m|      \e[92m\\\e[m'
+      buf[14]=' |    \e[95m_|\e[m'
+      ;;
+    7)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]='      __'
+      buf[ 4]='      \e[4m\\ \\\e[m'
+      buf[ 5]='       (_)'
+      buf[ 6]='       /  \\'
+      buf[ 7]='       \\   \\'
+      buf[ 8]='      __\\o  \\'
+      buf[ 9]='     /       |'
+      buf[10]='    /__      |'
+      buf[11]='     \e[92m_|\e[m\\_____|'
+      buf[12]='   ====     \e[95m\\\e[m'
+      buf[13]='   |__|      \e[95m/\e[m'
+      buf[14]='   |  |'
+      ;;
+    6)
+      buf[ 0]=''
+      buf[ 1]='         __'
+      buf[ 2]='         \e[4m\\ \\\e[m'
+      buf[ 3]='          (_)'
+      buf[ 4]='          /  \\'
+      buf[ 5]='          \\   \\'
+      buf[ 6]='         __|o  |'
+      buf[ 7]='        /      |'
+      buf[ 8]='     __/       /'
+      buf[ 9]='     \\        /'
+      buf[10]='      \\______/\e[95m_\e[m'
+      buf[11]='      \e[92m/        \e[95m|\e[m'
+      buf[12]='    \e[92m_/\e[m  ===='
+      buf[13]='        |__|'
+      buf[14]='        |  |'
+      ;;
+    5)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]='           __'
+      buf[ 3]='           \e[4m\\ \\\e[m'
+      buf[ 4]='            (_)'
+      buf[ 5]='           /  \\'
+      buf[ 6]='           \\   \\'
+      buf[ 7]='            \\   \\'
+      buf[ 8]='     _______| o  |'
+      buf[ 9]='    /           /'
+      buf[10]='    \\        _/'
+      buf[11]='     \\__    /\e[95m/\e[m'
+      buf[12]='        \\__/ ===='
+      buf[13]='          \e[92m\\\e[m  |__|'
+      buf[14]='           \e[92m/\e[m |  |'
+      ;;
+    4)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]=''
+      buf[ 4]='         _'
+      buf[ 5]='        \e[4m\\ \\\e[m'
+      buf[ 6]='        (_)_'
+      buf[ 7]='         |  \\'
+      buf[ 8]='         |  |/'
+      buf[ 9]='         | o/\\'
+      buf[10]='        /     |'
+      buf[11]='       /     _/'
+      buf[12]='       \\___   \\   ===='
+      buf[13]='       \e[95m/ \e[m  \\_  \\  |__|'
+      buf[14]='     \e[95m_/  \e[m    \\__\\ |  |'
+      ;;
+    3)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]=''
+      buf[ 4]='         _'
+      buf[ 5]='        \e[4m| |\e[m'
+      buf[ 6]='        (_)_'
+      buf[ 7]='         |  \\'
+      buf[ 8]='         |  |'
+      buf[ 9]='         |   \\'
+      buf[10]='        / o   \\'
+      buf[11]='       /      _|'
+      buf[12]='       |      \\        ===='
+      buf[13]='        \\___  |        |__|'
+      buf[14]='         \e[95m_|\e[m \\_|        |  |'
+      ;;
+    2)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]='          _'
+      buf[ 4]='         \e[4m| |\e[m'
+      buf[ 5]='         (_)'
+      buf[ 6]='         /  \\'
+      buf[ 7]='         |  |'
+      buf[ 8]='         | /|'
+      buf[ 9]='         | o \\'
+      buf[10]='         /    \\'
+      buf[11]='        /     |'
+      buf[12]='       |______|             ===='
+      buf[13]='         \e[92m/  \e[95m\\\e[m               |__|'
+      buf[14]='       \e[92m\\/    \e[95m/\e[m              |  |'
+      ;;
+    1)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]='          _'
+      buf[ 4]='         \e[4m| |\e[m'
+      buf[ 5]='         (_)'
+      buf[ 6]='         /  \\'
+      buf[ 7]='         |  |'
+      buf[ 8]='         | /|'
+      buf[ 9]='         | o \\'
+      buf[10]='         /    \\'
+      buf[11]='        /     |'
+      buf[12]='       |_______\\\e[95m_\e[m                ----'
+      buf[13]='         \e[92m|      \e[95m|\e[m                :..:'
+      buf[14]='        \e[92m_|\e[m                       :  :'
+      ;;
+    0)
+      buf[ 0]=''
+      buf[ 1]=''
+      buf[ 2]=''
+      buf[ 3]='          _'
+      buf[ 4]='         \e[4m| |\e[m'
+      buf[ 5]='         (_)'
+      buf[ 6]='         /  \\'
+      buf[ 7]='         |  |'
+      buf[ 8]='         |  |'
+      buf[ 9]='         | / \\'
+      buf[10]='         /o   \\'
+      buf[11]='        /     |'
+      buf[12]='       |______\\                       ....'
+      buf[13]='         \e[95m/  \e[92m\\\e[m                         .  .'
+      buf[14]='       \e[95m\\/    \e[92m\\\e[m                        .  .'
+      ;;
+    *)
+      buf[ 0]='WTF?'
+      buf[ 1]='WTF?'
+      buf[ 2]='WTF?'
+      buf[ 3]='WTF?'
+      buf[ 4]='WTF?'
+      buf[ 5]='WTF?'
+      buf[ 6]='WTF?'
+      buf[ 7]='WTF?'
+      buf[ 8]='WTF?'
+      buf[ 9]='WTF?'
+      buf[10]='WTF?'
+      buf[11]='WTF?'
+      buf[12]='WTF?'
+      buf[13]='WTF?'
+      buf[14]='WTF?'
+      ;;
+  esac
+  #buf[15]="$(( ( $1 + 30 ) % 50 / 5 ))"
+}
+
+. anim
+
+function advanceRenderingPosition () {
+  let animX="${animX} - 5"
+}
+
+function waitBetweenFrames () {
+  sleep 0.1
+}
+
+function preAnim () {
+  let animX="( ( ${animW} / 50 ) + 1 ) * 50"
+  for right in $(seq 8 50 $animW)
+  do
+    echo -e "\e[u\e[12B\e[${right}C===="
+    echo -e "\e[u\e[13B\e[${right}C|__|"
+    echo -e "\e[u\e[14B\e[${right}C|  |"
+  done
+}
+
+#function postFrame () {
+#  if
+#    test $(( ( $1 + 30 ) % 50 / 5 )) -le 4
+#  then
+#    read
+#  fi
+#}
+
+animate

@@ -1,0 +1,71 @@
+#!/bin/bash
+function printToBuffers () {
+  case $(( ( $1 + 100 )  % 4 )) in
+    0)
+      buf[0]='\e[1;40m    \e[93m___                       \e[91m____'
+      buf[1]='\e[1;40m   \e[93m/   \\                     \e[91m/    \\'
+      buf[2]='\e[1;97;40m. \e[93m|     |                   \e[91m|\e[97mO O\e[91m   |'
+      buf[3]='\e[1;40m  \e[93m|     |                   \e[91m|      |'
+      buf[4]='\e[1;40m   \e[93m\\___/                    \e[91m|/|/\\|\\|'
+      ;;
+    1)
+      buf[0]='\e[1;40m    \e[93m___                       \e[91m____'
+      buf[1]='\e[1;40m   \e[93m/   \\                     \e[91m/    \\'
+      buf[2]="\e[1;97;40m   \e[93m'-.  |                   \e[91m|\e[97mO O\e[91m   |"
+      buf[3]="\e[1;40m   \e[93m,-'  |                   \e[91m|      |"
+      buf[4]='\e[1;40m   \e[93m\\___/                     \e[91m\\|\\/|/'
+      ;;
+    2)
+      buf[0]='\e[1;40m    \e[93m___                       \e[91m____'
+      buf[1]='\e[1;40m    \e[93m\\  \\                     \e[91m/    \\'
+      buf[2]="\e[1;97;40m  .  \e[93m\\  |                   \e[91m|\e[97mO O\e[91m   |"
+      buf[3]="\e[1;40m     \e[93m/  |                   \e[91m|      |"
+      buf[4]='\e[1;40m    \e[93m/__/                    \e[91m|/|/\\|\\|'
+      ;;
+    3)
+      buf[0]='\e[1;40m    \e[93m___                       \e[91m____'
+      buf[1]='\e[1;40m   \e[93m/   \\                     \e[91m/    \\'
+      buf[2]="\e[1;97;40m . \e[93m'-.  |                   \e[91m|\e[97mO O\e[91m   |"
+      buf[3]="\e[1;40m   \e[93m,-'  |                   \e[91m|      |"
+      buf[4]='\e[1;40m   \e[93m\\___/                     \e[91m\\|\\/|/'
+      ;;
+  esac
+}
+
+. anim
+
+function waitBetweenFrames () {
+  sleep 0.06
+}
+
+function preAnim () {
+  echo -e "\e[u\e[3A\e[40m\e[K\e[m"
+  echo -e "\e[u\e[2A\e[40m\e[K\e[m"
+  echo -e "\e[u\e[A\e[44m\e[K\e[m"
+  echo -e "\e[u\e[40m\e[K\e[m"
+  echo -e "\e[u\e[B\e[40m\e[K\e[m"
+  echo -e "\e[u\e[2B\e[40m\e[K\e[m"
+  echo -e "\e[u\e[3B\e[40m\e[K\e[m"
+  echo -e "\e[u\e[4B\e[40m\e[K\e[m"
+  echo -e "\e[u\e[5B\e[44m\e[K\e[m"
+  echo -e "\e[u\e[6B\e[40m\e[K\e[m"
+  echo -e "\e[u\e[7B\e[40m\e[K\e[m"
+  echo -e "\e[u\e[2B\c"
+  for x in $(seq 0 4 ${animW})
+  do
+    echo -e "\e[1;97;40m.\e[m\e[3C\c"
+  done
+  for right in $(seq 40 40 $animW)
+  do
+    let "top = right - 22"
+    let "bottom = right - 29"
+    echo -e "\e[u\e[3A\e[${top}C\e[44m  \e[40m          \e[44m  \e[m"
+    echo -e "\e[u\e[2A\e[${top}C\e[44m  \e[40m          \e[44m  \e[m"
+    echo -e "\e[u\e[A\e[$(( top + 2 ))C\e[40m          "
+    echo -e "\e[u\e[5B\e[$(( bottom + 2 ))C\e[40m          "
+    echo -e "\e[u\e[6B\e[${bottom}C\e[44m  \e[40m          \e[44m  \e[m"
+    echo -e "\e[u\e[7B\e[${bottom}C\e[44m  \e[40m          \e[44m  \e[m"
+  done
+}
+
+animate

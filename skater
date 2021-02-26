@@ -1,0 +1,79 @@
+#!/bin/bash
+function printToBuffers () {
+  # Note: the frame order is biggest number first
+  case $(( ( $1 + 50 ) % 24 )) in
+    3|4|5|6|7|8)
+      buf[0]='   \\   _'
+      buf[1]='    \\ ( )'
+      buf[2]='     \\_|_'
+      buf[3]='       | \\'
+      buf[4]='       |  \\'
+      buf[5]='       |   \\'
+      buf[6]='    ___|'
+      buf[7]='   /    \\'
+      buf[8]='__/      \\'
+      buf[9]='oo      __\\'
+      buf[10]='        oo'
+      ;;
+    2|9)
+      buf[0]='       _'
+      buf[1]='      ( )'
+      buf[2]='  _____|_'
+      buf[3]='       | \\'
+      buf[4]='       |  \\'
+      buf[5]='       |   \\'
+      buf[6]='    ___|'
+      buf[7]='   /   |'
+      buf[8]='__/    |'
+      buf[9]='oo   __|'
+      buf[10]='     oo'
+      ;;
+    10|11)
+      buf[0]='       _'
+      buf[1]='      ( )'
+      buf[2]='      _|_'
+      buf[3]='     / | \\'
+      buf[4]='  __/ _|__>'
+      buf[5]='    ___|'
+      buf[6]='    |  /'
+      buf[7]='  __| /'
+      buf[8]='  oo  \\'
+      buf[9]='     __\\'
+      buf[10]='     oo'
+      ;;
+    12)
+      buf[0]='       _'
+      buf[1]='      ( )'
+      buf[2]='      _|_'
+      buf[3]='     / | \\'
+      buf[4]='  __/ _|__>'
+      buf[5]='       |'
+      buf[6]='       /'
+      buf[7]='      /'
+      buf[8]='      \\'
+      buf[9]='     __\\'
+      buf[10]='     oo'
+      ;;
+    *)
+      buf[0]='       _'
+      buf[1]='      ( )'
+      buf[2]='      _|_'
+      buf[3]='     | | |'
+      buf[4]='     | | |'
+      buf[5]='     | | |'
+      buf[6]='       /'
+      buf[7]='      /'
+      buf[8]='      \\'
+      buf[9]='     __\\'
+      buf[10]='     oo'
+      ;;
+  esac
+}
+
+. anim
+
+function waitBetweenFrames () {
+  sleep 0.045
+}
+
+animate

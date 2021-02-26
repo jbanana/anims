@@ -1,0 +1,5 @@
+#!/bin/bash
+for s in $(grep -l "^. anim$" $(find $(dirname $0) -type f | sort -R) | head -n 1)
+do
+  $s
+done
