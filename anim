@@ -32,6 +32,10 @@ function preAnim () {
   :
 }
 
+function postAnim () {
+  :
+}
+
 function preFrame () {
   :
 }
@@ -124,4 +128,6 @@ function animate () {
     waitBetweenFrames
     advanceRenderingPosition
   done
+
+  postAnim
 }
