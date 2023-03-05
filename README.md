@@ -1,6 +1,8 @@
 # anims
 Create ASCII art animations for your terminal window
 
+*Note*: this is now hosted at [Codeberg](https://codeberg.org/JBanana/anims)
+
 This is a little framework to make it (relatively) easy to make animations of things crossing your terminal window.
 Several examples are provided, and it's not too hard to make your own:
 
