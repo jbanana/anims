@@ -58,6 +58,10 @@ function printToBuffers {
   esac
 }
 
+function waitBetweenFrames () {
+  :
+}
+
 . anim
 
 animate
